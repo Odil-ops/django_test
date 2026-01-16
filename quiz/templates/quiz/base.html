@@ -20,7 +20,7 @@
             }
         }
     </script>
-    <style type="text/tailwindcss">
+    <style>
         body {
             background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%);
             min-height: 100vh;
@@ -34,23 +34,43 @@
             border-radius: 1rem;
         }
         .btn-primary {
-            @apply bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-300 ease-in-out transform hover:scale-105;
+            background-color: #3b82f6;
+            color: white;
+            font-weight: bold;
+            padding: 0.5rem 1rem;
+            border-radius: 0.25rem;
+            transition: all 0.3s ease-in-out;
+            display: inline-block;
+        }
+        .btn-primary:hover {
+            background-color: #2563eb;
+            transform: scale(1.05);
         }
         .btn-success {
-            @apply bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded transition duration-300 ease-in-out transform hover:scale-105;
+            background-color: #10b981;
+            color: white;
+            font-weight: bold;
+            padding: 0.5rem 1rem;
+            border-radius: 0.25rem;
+            transition: all 0.3s ease-in-out;
+            display: inline-block;
+        }
+        .btn-success:hover {
+            background-color: #059669;
+            transform: scale(1.05);
         }
     </style>
 </head>
-<body class="flex flex-col">
+<body class="flex flex-col min-h-screen">
     <!-- Navbar -->
-    <nav class="glass-card m-4 p-4 flex justify-between items-center bg-opacity-30">
+    <nav class="glass-card m-4 p-4 flex justify-between items-center">
         <a href="{% url 'quiz:home' %}" class="text-2xl font-bold flex items-center space-x-2">
             <i class="fas fa-code text-blue-400"></i>
             <span>Dasturlash Test</span>
         </a>
         <div class="space-x-4">
-            <a href="{% url 'quiz:home' %}" class="hover:text-blue-300 transition">Bo'limlar</a>
-            <a href="/admin/" class="hover:text-blue-300 transition">Admin</a>
+            <a href="{% url 'quiz:home' %}" class="hover:text-blue-300 transition duration-300">Bo'limlar</a>
+            <a href="/admin/" class="hover:text-blue-300 transition duration-300">Admin</a>
         </div>
     </nav>
 
