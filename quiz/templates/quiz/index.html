@@ -1,0 +1,29 @@
+{% extends 'quiz/base.html' %}
+
+{% block content %}
+<div class="text-center mb-12">
+    <h1 class="text-4xl font-bold mb-4 drop-shadow-md">Bilimingizni sinab ko'ring</h1>
+    <p class="text-xl text-gray-300">Qaysi dasturlash tili bo'yicha test ishlamoqchisiz?</p>
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    {% for subject in subjects %}
+    <a href="{% url 'quiz:modules' subject.id %}" class="block group">
+        <div class="glass-card p-8 h-full flex flex-col items-center justify-center text-center transition duration-500 hover:bg-white/10 hover:shadow-2xl hover:border-blue-500/50">
+            <div class="text-6xl mb-4 text-blue-400 group-hover:text-blue-300 transition-transform group-hover:scale-110 duration-500">
+                <i class="{{ subject.icon }}"></i>
+            </div>
+            <h2 class="text-2xl font-bold mb-2">{{ subject.name }}</h2>
+            <p class="text-gray-400 text-sm mb-4">{{ subject.description }}</p>
+            <div class="mt-auto">
+                <span class="inline-block px-4 py-2 border border-blue-500/30 rounded-full text-blue-300 text-sm group-hover:bg-blue-600 group-hover:text-white transition">Testlarni ko'rish</span>
+            </div>
+        </div>
+    </a>
+    {% empty %}
+    <div class="col-span-full text-center py-10">
+        <p class="text-gray-400">Hozircha fanlar mavjud emas.</p>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

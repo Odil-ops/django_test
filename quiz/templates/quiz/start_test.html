@@ -1,0 +1,36 @@
+{% extends 'quiz/base.html' %}
+
+{% block title %}Testni Boshlash - {{ module.title }}{% endblock %}
+
+{% block content %}
+<div class="max-w-md mx-auto mt-10">
+    <div class="glass-card p-8">
+        <h2 class="text-2xl font-bold mb-6 text-center">Testga kirish</h2>
+        
+        <div class="mb-6 text-center">
+            <h3 class="text-lg font-semibold text-blue-300">{{ module.title }}</h3>
+            <p class="text-sm text-gray-400">20 ta savol • Cheklanmagan vaqt</p>
+        </div>
+
+        {% if error %}
+        <div class="bg-red-500/20 border border-red-500 text-red-200 px-4 py-3 rounded mb-4 text-center">
+            {{ error }}
+        </div>
+        {% endif %}
+
+        <form method="post" action="{% url 'quiz:start_test' module.id %}">
+            {% csrf_token %}
+            <div class="mb-6">
+                <label for="full_name" class="block text-gray-300 mb-2">Ism va Familiyangiz</label>
+                <input type="text" id="full_name" name="full_name" required 
+                       class="w-full bg-dark/50 border border-gray-600 rounded px-4 py-2 text-white focus:outline-none focus:border-blue-500 placeholder-gray-500"
+                       placeholder="Masalan: Azizov Aziz">
+            </div>
+            
+            <button type="submit" class="w-full btn-success text-center py-3 text-lg">
+                Testni Boshlash <i class="fas fa-arrow-right ml-2"></i>
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}
