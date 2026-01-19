@@ -22,7 +22,6 @@ ALLOWED_HOSTS = ['192.168.88.223', '127.0.0.1' ]
 
 INSTALLED_APPS = [
     'jazzmin',
-    'modeltranslation', # Must be before admin
     'quiz',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -53,15 +52,14 @@ ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],
+        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages', 
-                'django.template.context_processors.i18n',  
+                'django.contrib.messages.context_processors.messages',
             ],
         },
     },
@@ -166,5 +164,3 @@ TIME_ZONE = 'Asia/Tashkent'
 USE_I18N = True
 USE_L10N = True
 USE_TZ = True
-
-MODELTRANSLATION_DEFAULT_LANGUAGE = 'uz'

@@ -22,7 +22,7 @@ class ChoiceInline(TranslationTabularInline):
 
 # ---------- Question ----------
 @admin.register(Question)
-class QuestionAdmin(TranslationAdmin):
+class QuestionAdmin(admin.ModelAdmin):
     list_display = ("short_text", "module")
     list_filter = ("module__subject", "module")
     search_fields = ("text",)
@@ -35,7 +35,7 @@ class QuestionAdmin(TranslationAdmin):
 
 # ---------- Subject ----------
 @admin.register(Subject)
-class SubjectAdmin(TranslationAdmin):
+class SubjectAdmin(admin.ModelAdmin):
     list_display = ("name", "icon")
     search_fields = ("name",)
     ordering = ("name",)
@@ -43,7 +43,7 @@ class SubjectAdmin(TranslationAdmin):
 
 # ---------- Module ----------
 @admin.register(Module)
-class ModuleAdmin(TranslationAdmin):
+class ModuleAdmin(admin.ModelAdmin):
     list_display = ("title", "subject", "level")
     list_filter = ("subject", "level")
     search_fields = ("title",)
