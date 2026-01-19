@@ -5,10 +5,6 @@ from django.urls import path, include
 from django.conf.urls.i18n import i18n_patterns
 from django.http import HttpResponse
 
-# 1. Oddiy view yaratamiz
-def home_view(request):
-    return HttpResponse("Bosh sahifa - Django ishlayapti!")
-
 # 2. To'g'ri URL konfiguratsiyasi:
 urlpatterns = [
     # Til o'zgartirish uchun (i18n)
@@ -20,9 +16,6 @@ urlpatterns += i18n_patterns(
     # Admin paneli (faqat bir marta)
     path('admin/', admin.site.urls),
     
-    # Bosh sahifa
-    path('', home_view, name='home'),
-    
-    # Quiz app (agar mavjud bo'lsa)
-    # path('quiz/', include('quiz.urls')),
+    # Bosh sahifa - Quiz appga yo'naltiramiz
+    path('', include('quiz.urls')),
 )

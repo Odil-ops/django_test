@@ -76,13 +76,30 @@
             <span>{% trans "Programming Test" %}</span>
         </a>
 
-        <div class="space-x-4">
+        <div class="flex items-center space-x-4">
             <a href="{% url 'quiz:home' %}" class="hover:text-blue-300 transition duration-300">
                 {% trans "Sections" %}
             </a>
             <a href="/admin/" class="hover:text-blue-300 transition duration-300">
                 {% trans "Admin" %}
             </a>
+
+            <!-- Language Switcher -->
+            <form action="{% url 'set_language' %}" method="post" class="flex items-center space-x-2">
+                {% csrf_token %}
+                <input name="next" type="hidden" value="{{ redirect_to }}">
+                <select name="language" onchange="this.form.submit()" 
+                        class="bg-white/10 border border-white/20 rounded px-2 py-1 text-sm focus:outline-none focus:border-blue-500 text-white">
+                    {% get_current_language as LANGUAGE_CODE %}
+                    {% get_available_languages as LANGUAGES %}
+                    {% get_language_info_list for LANGUAGES as languages %}
+                    {% for language in languages %}
+                        <option value="{{ language.code }}" {% if language.code == LANGUAGE_CODE %}selected{% endif %} class="text-black">
+                            {{ language.name_local }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </form>
         </div>
     </nav>
 
