@@ -22,6 +22,7 @@ ALLOWED_HOSTS = ['192.168.88.223', '127.0.0.1' ]
 
 INSTALLED_APPS = [
     'jazzmin',
+    'modeltranslation', # Must be before admin
     'quiz',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -165,3 +166,5 @@ TIME_ZONE = 'Asia/Tashkent'
 USE_I18N = True
 USE_L10N = True
 USE_TZ = True
+
+MODELTRANSLATION_DEFAULT_LANGUAGE = 'uz'

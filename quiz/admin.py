@@ -1,5 +1,6 @@
 from django.contrib import admin
 from django.utils.translation import gettext_lazy as _
+from modeltranslation.admin import TranslationAdmin, TranslationTabularInline
 
 from .models import (
     Subject,
@@ -12,7 +13,7 @@ from .models import (
 
 
 # ---------- Inline ----------
-class ChoiceInline(admin.TabularInline):
+class ChoiceInline(TranslationTabularInline):
     model = Choice
     extra = 4
     verbose_name = _("Choice")
@@ -21,7 +22,7 @@ class ChoiceInline(admin.TabularInline):
 
 # ---------- Question ----------
 @admin.register(Question)
-class QuestionAdmin(admin.ModelAdmin):
+class QuestionAdmin(TranslationAdmin):
     list_display = ("short_text", "module")
     list_filter = ("module__subject", "module")
     search_fields = ("text",)
@@ -34,7 +35,7 @@ class QuestionAdmin(admin.ModelAdmin):
 
 # ---------- Subject ----------
 @admin.register(Subject)
-class SubjectAdmin(admin.ModelAdmin):
+class SubjectAdmin(TranslationAdmin):
     list_display = ("name", "icon")
     search_fields = ("name",)
     ordering = ("name",)
@@ -42,7 +43,7 @@ class SubjectAdmin(admin.ModelAdmin):
 
 # ---------- Module ----------
 @admin.register(Module)
-class ModuleAdmin(admin.ModelAdmin):
+class ModuleAdmin(TranslationAdmin):
     list_display = ("title", "subject", "level")
     list_filter = ("subject", "level")
     search_fields = ("title",)
