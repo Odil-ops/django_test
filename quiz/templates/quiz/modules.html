@@ -1,15 +1,22 @@
+{% load i18n %}
 {% extends 'quiz/base.html' %}
 
 {% block content %}
 <div class="mb-8">
     <a href="{% url 'quiz:home' %}" class="text-blue-400 hover:text-white mb-4 inline-block">
-        <i class="fas fa-arrow-left mr-2"></i> Orqaga
+        <i class="fas fa-arrow-left mr-2"></i>
+        {% trans "Back" %}
     </a>
+
     <div class="flex items-center space-x-4">
         <i class="{{ subject.icon }} text-5xl text-blue-500"></i>
         <div>
-            <h1 class="text-3xl font-bold">{{ subject.name }}</h1>
-            <p class="text-gray-400">Darajani tanlang</p>
+            <h1 class="text-3xl font-bold">
+                {{ subject.name }}
+            </h1>
+            <p class="text-gray-400">
+                {% trans "Choose level" %}
+            </p>
         </div>
     </div>
 </div>
@@ -27,15 +34,30 @@
                     {{ module.get_level_display }}
                 </span>
             </div>
-            <h2 class="text-xl font-bold">{{ module.title }}</h2>
-            <p class="text-sm text-gray-400 mt-1">{{ module.questions.count }} ta savol</p>
+
+            <h2 class="text-xl font-bold">
+                {{ module.title }}
+            </h2>
+
+            <p class="text-sm text-gray-400 mt-1">
+                {% blocktrans count question_count=module.questions.count %}
+                    {{ question_count }} question
+                {% plural %}
+                    {{ question_count }} questions
+                {% endblocktrans %}
+            </p>
         </div>
+
         <a href="{% url 'quiz:start_test' module.id %}" class="btn-primary">
-            <i class="fas fa-play mr-2"></i> Boshlash
+            <i class="fas fa-play mr-2"></i>
+            {% trans "Start" %}
         </a>
     </div>
+
     {% empty %}
-    <p class="text-gray-400">Modullar topilmadi.</p>
+    <p class="text-gray-400">
+        {% trans "No modules found." %}
+    </p>
     {% endfor %}
 </div>
 {% endblock %}

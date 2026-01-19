@@ -1,34 +1,50 @@
+{% load i18n %}
 {% extends 'quiz/base.html' %}
 
 {% block content %}
 <div class="max-w-3xl mx-auto">
+
     <div class="mb-6 flex justify-between items-center">
-        <h2 class="text-2xl font-bold">Batafsil Tahlil</h2>
+        <h2 class="text-2xl font-bold">
+            {% trans "Detailed Analysis" %}
+        </h2>
+
         <a href="{% url 'quiz:result' attempt.id %}" class="text-blue-400 hover:text-white">
-            <i class="fas fa-arrow-left"></i> Natijaga qaytish
+            <i class="fas fa-arrow-left"></i>
+            {% trans "Back to results" %}
         </a>
     </div>
 
     {% for response in attempt.responses.all %}
-    <div class="glass-card p-6 mb-6 {% if response.is_correct %}border-green-500/50{% else %}border-red-500/50{% endif %}">
+    <div class="glass-card p-6 mb-6
+        {% if response.is_correct %}border-green-500/50{% else %}border-red-500/50{% endif %}">
+
         <div class="flex items-start space-x-4 mb-4">
-            <span class="w-8 h-8 flex-shrink-0 flex items-center justify-center rounded-full font-bold 
+            <span class="w-8 h-8 flex-shrink-0 flex items-center justify-center rounded-full font-bold
                 {% if response.is_correct %}bg-green-500 text-white{% else %}bg-red-500 text-white{% endif %}">
                 {{ forloop.counter }}
             </span>
+
             <div class="flex-grow">
-                <p class="text-lg font-medium mb-3">{{ response.question.text }}</p>
-                
+                <p class="text-lg font-medium mb-3">
+                    {{ response.question.text }}
+                </p>
+
                 <div class="space-y-2">
                     {% for choice in response.question.choices.all %}
-                    <div class="flex items-center justify-between p-3 rounded 
-                        {% if choice == response.selected_choice and response.is_correct %}bg-green-600/20 border border-green-500
-                        {% elif choice == response.selected_choice and not response.is_correct %}bg-red-600/20 border border-red-500
-                        {% elif choice.is_correct and not response.is_correct %}bg-green-600/10 border border-green-500/50
-                        {% else %}bg-white/5{% endif %}">
-                        
+                    <div class="flex items-center justify-between p-3 rounded
+                        {% if choice == response.selected_choice and response.is_correct %}
+                            bg-green-600/20 border border-green-500
+                        {% elif choice == response.selected_choice and not response.is_correct %}
+                            bg-red-600/20 border border-red-500
+                        {% elif choice.is_correct and not response.is_correct %}
+                            bg-green-600/10 border border-green-500/50
+                        {% else %}
+                            bg-white/5
+                        {% endif %}">
+
                         <span>{{ choice.text }}</span>
-                        
+
                         {% if choice == response.selected_choice %}
                             {% if response.is_correct %}
                                 <i class="fas fa-check text-green-400"></i>
@@ -45,5 +61,6 @@
         </div>
     </div>
     {% endfor %}
+
 </div>
 {% endblock %}
